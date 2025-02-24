@@ -1,0 +1,212 @@
+/* 基础样式重置 */
+/* 主内容区域样式 */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+}
+
+/* 个人信息卡片样式 */
+.personal-info-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.info-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+.user-basic-info h3 {
+    margin: 0;
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.employee-id {
+    color: #666;
+    font-size: 14px;
+}
+
+.department-info {
+    text-align: right;
+}
+
+.department-info span {
+    display: block;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.performance-summary {
+    display: flex;
+    gap: 32px;
+}
+
+.performance-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.performance-item .label {
+    color: #666;
+}
+
+.performance-item .value {
+    font-weight: 500;
+}
+
+.grade-a {
+    color: #1a73e8;
+    font-weight: bold;
+}
+
+/* 检索区域样式 */
+.search-section {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.search-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    align-items: end;
+}
+
+.search-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.search-item label {
+    font-size: 14px;
+    color: #666;
+}
+
+.search-input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.search-button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-button {
+    background-color: #1a73e8;
+    color: white;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #1557b0;
+}
+
+/* 表格区域样式 */
+.table-section {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.performance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.performance-table th,
+.performance-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.performance-table th {
+    background-color: #f8f9fa;
+    font-weight: 500;
+    color: #666;
+}
+
+.performance-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.view-button {
+    background-color: #1a73e8;
+    color: white;
+    padding: 6px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.view-button:hover {
+    background-color: #1557b0;
+}
+
+/* 分页控件样式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.page-button {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.page-button:hover {
+    background-color: #f8f9fa;
+    border-color: #1a73e8;
+}
+
+.page-button.active {
+    background-color: #1a73e8;
+    color: white;
+    border-color: #1a73e8;
+}
+
+.menu-item > a.active {
+    background-color: #e6f0ff;
+    color: #1a73e8;
+}
+
+.submenu a.active {
+    background-color: #e6f0ff;
+    color: #1a73e8;
+    font-weight: 500;
+}
+
+.submenu {
+    display: none;
+    background-color: #f8f9fa;
+}

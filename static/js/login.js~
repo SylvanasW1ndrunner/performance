@@ -1,0 +1,45 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.getElementById("loginForm");
+    const messageElement = document.getElementById("message");
+
+    loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault(); // 阻止表单默认提交行为
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        try {
+            const response = await fetch("/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                // 登录成功，存储 Token
+                localStorage.setItem("access_token", result.access_token);
+                localStorage.setItem("user_info", JSON.stringify(result.user_info));
+
+                messageElement.textContent = "登录成功，正在跳转...";
+                messageElement.style.color = "green";
+
+                // 1 秒后跳转到仪表盘
+                setTimeout(() => {
+                    window.location.href = "/dashboard";
+                }, 1000);
+            } else {
+                // 登录失败，显示错误信息
+                messageElement.textContent = result.error || "登录失败";
+                messageElement.style.color = "red";
+            }
+        } catch (error) {
+            console.error("请求错误:", error);
+            messageElement.textContent = "服务器错误，请稍后重试";
+            messageElement.style.color = "red";
+        }
+    });
+});

@@ -1,0 +1,298 @@
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    flex: 1;
+}
+
+.content h1 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    .content {
+        margin-left: 200px;
+    }
+}
+.container {
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.date-display {
+    color: #666;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-weight: bold;
+    margin: 20px 0 10px;
+    padding: 10px;
+    background: #1a73e8;
+    color: white;
+    border-radius: 4px;
+}
+
+
+.criteria-item .remove {
+    margin-left: auto;
+    color: #999;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.dimension-section {
+    margin-bottom: 20px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.dimension-title {
+    font-weight: 600;
+    color: #1a73e8;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #1a73e8;
+}
+
+.criteria-list {
+    padding-left: 15px;
+}
+
+/* 修改现有的criteria-item样式 */
+.criteria-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #eee;
+    margin: 5px 0;
+    border-radius: 4px;
+    background: white;
+}
+
+.add-criteria {
+    color: #1a73e8;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.distribution-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.distribution-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.score-input {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #1a73e8;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.info-text {
+    color: #666;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.info-link {
+    color: #1a73e8;
+    text-decoration: none;
+}
+/* 时间选择器样式 */
+.date-input {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* 等级分值输入框样式 */
+.distribution-grid {
+    margin: 10px 0;
+}
+
+.grade-wrapper {
+    display: flex;
+    justify-content: space-around; /* 改用space-around来增加间距 */
+    padding: 20px;  /* 增加内边距 */
+    background: #f8f9fa;
+    border-radius: 4px;
+    gap: 40px;  /* 添加固定间距 */
+}
+
+.grade-pair {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 100px;  /* 设置最小宽度 */
+}
+
+.grade-input {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* 考勤规则样式调整 */
+.score-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.score-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.score-input {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+/* 提交按钮区域样式 */
+.submit-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.submit-button {
+    background-color: #1a73e8;
+    color: white;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #1557b0;
+}
+
+.submit-button:active {
+    background-color: #0d47a1;
+}
+.percentage-input {
+    width: 50px;
+    padding: 2px 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 12px;
+    margin: 0 3px;
+}
+
+.percentage-input:focus {
+    outline: none;
+    border-color: #1a73e8;
+}
+.menu-item > a.active {
+    background-color: #e6f0ff;
+    color: #1a73e8;
+}
+
+.submenu a.active {
+    background-color: #e6f0ff;
+    color: #1a73e8;
+    font-weight: 500;
+}
+
+.submenu {
+    display: none;
+    background-color: #f8f9fa;
+}

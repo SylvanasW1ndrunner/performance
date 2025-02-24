@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gentable</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gentable.css') }}">
+</head>
+<body>
+<!-- 侧边栏保持不变 -->
+
+<!-- 更新主内容区域 -->
+<div class="content">
+
+    <div class="container">
+        <div class="header">
+            <input type="text" class="search-input" placeholder="请输入考核表标题，如：2025年第一季度绩效考核">
+            <div class="date-display">
+                <span>考核周期：<input type="date" class="date-input" value="2025-03-08"></span>
+                <span>创建日期：2023-02-28</span>
+            </div>
+        </div>
+
+        <div class="section-title">考核维度</div>
+
+        <!-- 职能表现部分 -->
+        <div class="dimension-section">
+            <div class="dimension-title">职能表现</div>
+            <div class="criteria-list">
+                <div class="criteria-item">
+                    <span>代码质量</span>
+                    <span class="remove">×</span>
+                </div>
+                <div class="criteria-item">
+                    <span>团队协作</span>
+                    <span class="remove">×</span>
+                </div>
+                <div class="add-criteria">
+                    <span>+ 添加评分项</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 产品/项目表现部分 -->
+        <div class="dimension-section">
+            <div class="dimension-title">产品/项目表现</div>
+            <div class="criteria-list">
+                <div class="criteria-item">
+                    <span>项目交付时间</span>
+                    <span class="remove">×</span>
+                </div>
+                <div class="add-criteria">
+                    <span>+ 添加评分项</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">等级分值设置</div>
+        <div class="distribution-grid">
+            <div class="distribution-item">
+                <!-- 等级分值设置部分 -->
+                <div class="distribution-grid">
+                    <div class="grade-wrapper">
+                        <div class="grade-pair">
+                            <span>A</span>
+                            <input type="number" class="grade-input" value="10">
+                        </div>
+                        <div class="grade-pair">
+                            <span>B+</span>
+                            <input type="number" class="grade-input" value="9">
+                        </div>
+                        <div class="grade-pair">
+                            <span>B</span>
+                            <input type="number" class="grade-input" value="7">
+                        </div>
+                        <div class="grade-pair">
+                            <span>C</span>
+                            <input type="number" class="grade-input" value="2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">考勤规则</div>
+        <div class="score-item">
+            <span>迟到一次扣</span>
+            <input type="number" class="score-input" value="1">
+        </div>
+        <div class="score-item">
+            <span>早退一次扣</span>
+            <input type="number" class="score-input" value="2">
+        </div>
+        <div class="score-item">
+            <span>xxx扣</span>
+            <input type="number" class="score-input" value="1">
+        </div>
+
+        <div class="section-title">强制分布</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+            <span>开启强制分布</span>
+            <label class="switch">
+                <input type="checkbox" id="forcedDistributionSwitch">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="info-text">
+            开启后该考核表将按分布比例进行打分: A & B+ 等级占比不超过
+            <input type="number" id="distributionPercentage" class="percentage-input" value="30" min="0" max="100"> %
+            <a href="#" class="info-link">查看</a>
+        </div>
+    </div>
+    <div class="submit-section">
+        <button id="submitForm" class="submit-button">提交考核表</button>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/Gentable.js') }}"></script>
+</body>
+</html>

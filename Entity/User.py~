@@ -1,0 +1,27 @@
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
+class User(db.Model):
+    __tablename__ = 'users'
+
+    emp_id = db.Column(db.String(20), primary_key=True)
+    emp_name = db.Column(db.String(50), nullable=False)
+    position = db.Column(db.String(100), nullable=False)
+    department = db.Column(db.String(100), nullable=False)
+    user_role = db.Column(db.String(20), nullable=False)
+    immediate_leader = db.Column(db.String(20), db.ForeignKey('users.emp_id'))
+    top_leader = db.Column(db.String(20), db.ForeignKey('users.emp_id'))
+    ismanage = db.Column(db.Boolean, nullable=True)
+
+    def to_dict(self):
+        return {
+            "emp_id": self.emp_id,
+            "emp_name": self.emp_name,
+            "position": self.position,
+            "department": self.department,
+            "role": self.user_role,
+            "immediate_leader": self.immediate_leader,
+            "top_leader": self.top_leader,
+            "ismanage": self.ismanage
+        }

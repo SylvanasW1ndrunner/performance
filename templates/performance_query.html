@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绩效管理系统 - 绩效查询</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gentable.css') }}">
+</head>
+<body>
+<!-- 侧边栏 -->
+<div class="sidebar">
+    <h2>绩效管理系统</h2>
+    <ul>
+        <li class="menu-item">
+            <a href="#">绩效考核</a>
+            <ul class="submenu" style="display: block;">
+                <!-- 在考核表发布页面时，这个链接会带有active类 -->
+                <li><a href="{{ url_for('Gentable') }}">考核表发布</a></li>
+                <li><a href="{{ url_for('score_evaluation') }}">绩效评分</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="{{ url_for('member_management') }}">成员管理</a>
+        </li>
+        <li class="menu-item">
+            <a href="#">系统管理</a>
+            <ul class="submenu">
+                <li><a href="{{ url_for('data_import') }}">数据导入</a></li>
+                <li><a href="{{ url_for('permission_settings') }}">权限设置</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="{{ url_for('performance_query') }}" class="active">绩效查询</a>
+        </li>
+    </ul>
+</div>
+<!-- 主内容区域 -->
+<div class="content">
+    <h1>绩效查询</h1>
+
+    <!-- 个人信息卡片 -->
+    <div class="personal-info-card">
+        <div class="info-header">
+            <div class="user-basic-info">
+                <h3>张三</h3>
+                <span class="employee-id">工号：10086</span>
+            </div>
+            <div class="department-info">
+                <span>技术部 - 后端开发</span>
+                <span>高级工程师</span>
+            </div>
+        </div>
+        <div class="performance-summary">
+            <div class="performance-item">
+                <span class="label">直属领导</span>
+                <span class="value">李四</span>
+            </div>
+            <div class="performance-item">
+                <span class="label">最高领导</span>
+                <span class="value">王五</span>
+            </div>
+            <div class="performance-item">
+                <span class="label">最近绩效</span>
+                <span class="value grade-a">A</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 检索条件区域 -->
+    <div class="search-section">
+        <div class="search-grid">
+            <div class="search-item">
+                <label>部门</label>
+                <select class="search-input" name="department">
+                    <option value="">全部</option>
+                    <option value="tech">技术部</option>
+                    <option value="product">产品部</option>
+                    <option value="design">设计部</option>
+                </select>
+            </div>
+            <div class="search-item">
+                <label>直属领导</label>
+                <select class="search-input" name="directLeader">
+                    <option value="">全部</option>
+                    <option value="leader1">李四</option>
+                    <option value="leader2">张六</option>
+                </select>
+            </div>
+            <div class="search-item">
+                <label>最高领导</label>
+                <select class="search-input" name="topLeader">
+                    <option value="">全部</option>
+                    <option value="top1">王五</option>
+                    <option value="top2">赵七</option>
+                </select>
+            </div>
+            <div class="search-item">
+                <label>姓名</label>
+                <input type="text" class="search-input" name="name" placeholder="请输入姓名">
+            </div>
+            <div class="search-item">
+                <label>工号</label>
+                <input type="text" class="search-input" name="employeeId" placeholder="请输入工号">
+            </div>
+            <div class="search-button-container">
+                <button class="search-button">检索</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 表格区域 -->
+    <div class="table-section">
+        <table class="performance-table">
+            <thead>
+            <tr>
+                <th>姓名</th>
+                <th>工号</th>
+                <th>部门</th>
+                <th>职位</th>
+                <th>直属领导</th>
+                <th>最高领导</th>
+                <th>绩效</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>张三</td>
+                <td>10086</td>
+                <td>技术部</td>
+                <td>高级工程师</td>
+                <td>李四</td>
+                <td>王五</td>
+                <td><button class="view-button">查看</button></td>
+            </tr>
+            <tr>
+                <td>李四</td>
+                <td>10087</td>
+                <td>产品部</td>
+                <td>产品经理</td>
+                <td>王五</td>
+                <td>赵七</td>
+                <td><button class="view-button">查看</button></td>
+            </tr>
+            <!-- 可以添加更多行... -->
+            </tbody>
+        </table>
+
+        <!-- 分页控件 -->
+        <div class="pagination">
+            <button class="page-button">&lt;</button>
+            <button class="page-button active">1</button>
+            <button class="page-button">2</button>
+            <button class="page-button">3</button>
+            <span>...</span>
+            <button class="page-button">10</button>
+            <button class="page-button">&gt;</button>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+<script src="{{ url_for('static', filename='js/performance.js') }}"></script>
+</body>
+</html>

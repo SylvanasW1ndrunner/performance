@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft YaHei", sans-serif;
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px 0;
+    height: 100vh;
+    position: fixed;
+}
+
+.sidebar h2 {
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #34495e;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar > ul > li {
+    margin: 5px 0;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #34495e;
+}
+
+.sidebar .submenu {
+    display: none;
+    background-color: #34495e;
+    padding-left: 20px;
+}
+
+.sidebar .submenu a {
+    padding: 10px 20px;
+}
+
+.sidebar .active + .submenu {
+    display: block;
+}
+
+.sidebar a.active {
+    background-color: #3498db;
+}
+
