@@ -1,0 +1,379 @@
+/* 主内容区域 */
+.main-content {
+    margin-left: 250px; /* 侧边栏预留空间 */
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    flex: 1;
+}
+
+/* 标题样式 */
+.main-content h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* 可滚动表格容器 */
+.table-container {
+    max-height: 400px; /* 限制表格最大高度 */
+    overflow-y: auto; /* 当内容溢出时允许垂直滚动 */
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+/* 美化滚动条 */
+.table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #007BFF;
+    border-radius: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
+}
+
+/* 表格样式 */
+.assessment-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* 表头固定 */
+.assessment-table thead {
+    background-color: #007BFF;
+    color: #fff;
+    position: sticky;
+    top: 0;
+}
+
+/* 单元格样式 */
+.assessment-table th, .assessment-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* 表格行悬停效果 */
+.assessment-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+.view-btn, .delete-btn {
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.view-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.view-btn:hover {
+    background-color: #218838;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    margin-left: 8px;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+/* 遮罩层（半透明背景，确保覆盖整个屏幕） */
+/* 覆盖整个屏幕的背景 */
+.modal-overlay {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 弹窗容器设置为全屏 */
+.modal-container {
+    width: 100%; /* 宽度为100% */
+    height: 100%; /* 高度为100% */
+    padding: 20px;
+    box-sizing: border-box; /* 使得padding不影响大小 */
+    position: relative;
+    display: flex;
+    flex-direction: column; /* 使内容垂直布局 */
+    justify-content: flex-start; /* 默认顶部对齐 */
+    background: white; /* 设为白色背景 */
+}
+
+/* 标题栏 */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+/* 关闭按钮 */
+.modal-header .close-btn {
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+}
+
+.modal-header .close-btn:hover {
+    color: #555;
+}
+
+/* 主要内容区域 */
+.modal-content {
+    font-size: 14px;
+    color: #333;
+    flex-grow: 1; /* 使得内容部分可以扩展，填满剩余空间 */
+    overflow-y: auto; /* 允许内容区滚动 */
+}
+
+
+.date-display {
+    color: #666;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* 设置所有输入框为只读，并增加灰色背景 */
+.readonly-input {
+    width: 50px;
+    padding: 2px 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    background: #f8f9fa; /* 设为淡灰色背景 */
+    cursor: not-allowed;
+    color: #333; /* 保持文本可读 */
+
+    /* 确保文本不可选 */
+    user-select: none;
+}
+
+/* 适用于 Chrome, Safari, Edge, Opera */
+.readonly-input::-webkit-outer-spin-button,
+.readonly-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* 适用于 Firefox */
+.readonly-input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* 考核维度 */
+.section-title {
+    font-weight: bold;
+    margin: 20px 0 10px;
+    padding: 10px;
+    background: #1a73e8;
+    color: white;
+    border-radius: 4px;
+}
+
+/* 评分维度 */
+.dimension-section {
+    margin-bottom: 20px;
+    background: white; /* 设为白色背景 */
+    border-radius: 4px;
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+
+.dimension-title {
+    font-weight: 600;
+    color: #1a73e8;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #1a73e8;
+}
+
+/* 评分标准列表 */
+.criteria-list {
+    padding-left: 15px;
+}
+
+.criteria-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #eee;
+    margin: 5px 0;
+    border-radius: 4px;
+    background: white;
+}
+
+/* 评分等级 */
+.grade-wrapper {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background: white; /* 设为白色背景 */
+    border-radius: 4px;
+    gap: 40px;
+}
+
+.grade-pair {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 100px;
+}
+
+/* 评分输入框变成只读 */
+.grade-input {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    background: #f8f9fa; /* 设为淡灰色背景 */
+    cursor: not-allowed;
+    color: #333;
+}
+
+/* 考勤规则 */
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* 迟到/早退等扣分项的输入框只读 */
+.score-input {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f8f9fa;
+    cursor: not-allowed;
+    color: #333;
+}
+
+/* 强制分布 */
+.info-text {
+    color: #666;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.info-link {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+/* 关闭按钮样式 */
+.modal-footer {
+    text-align: center;
+    padding-top: 15px;
+}
+
+.modal-close-btn {
+    background-color: #1a73e8;
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-close-btn:hover {
+    background-color: #1557b0;
+}
+
+.modal-close-btn:active {
+    background-color: #0d47a1;
+}
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+/* 评分方式显示 */
+.evaluation-mode-display {
+    margin: 0 15px;
+    padding: 4px 8px;
+    background-color: #f0f8ff;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #1a73e8;
+    border: 1px solid #d0e3ff;
+}
+
+.evaluation-mode-display span {
+    font-weight: bold;
+}
+
+/* 分数值显示 */
+.score-value-container {
+    display: inline-flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.score-value-display {
+    font-weight: bold;
+    color: #3498db;
+    margin-right: 2px;
+}
+
+/* 调整维度标题区域布局 */
+.dimension-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+    position: relative;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #1a73e8;
+}
+
+/* 确保标题保持原有样式 */
+.dimension-header .dimension-title {
+    font-weight: 600;
+    color: #1a73e8;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}

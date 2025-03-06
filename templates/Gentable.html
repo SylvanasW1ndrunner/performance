@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gentable</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gentable.css') }}">
+</head>
+<body>
+<!-- 侧边栏保持不变 -->
+<div class="sidebar">
+    <h2>绩效管理系统</h2>
+    <ul>
+        <li class="menu-item">
+            <a href="{{ url_for('table_index') }}" class="active">绩效考核</a>
+            <ul class="submenu" style="display: block;">
+                <!-- 在考核表发布页面时，这个链接会带有active类 -->
+                <li><a href="{{ url_for('Gentable') }}" class="active">考核表发布</a></li>
+                <li><a href="{{ url_for('score_evaluation') }}">绩效评分</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="{{ url_for('member_management') }}">成员管理</a>
+        </li>
+        <li class="menu-item">
+            <a href="#">系统管理</a>
+            <ul class="submenu">
+                <li><a href="{{ url_for('data_import') }}">数据导入</a></li>
+                <li><a href="{{ url_for('permission_settings') }}">权限设置</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="{{ url_for('performance_query') }}">绩效查询</a>
+        </li>
+        <li class="menu-item">
+            <a href="{{ url_for('logout') }}" class="logout-btn">登出</a>
+        </li>
+    </ul>
+</div>
+<!-- 更新主内容区域 -->
+<div class="content">
+
+    <div class="container">
+        <div class="header">
+            <input type="text" class="search-input" placeholder="请输入考核表标题，如：2025年第一季度绩效考核">
+            <div class="date-display">
+                <span>考核周期：<input type="date" class="date-input" value="2025-03-08"></span>
+                <span>创建日期：2023-02-28</span>
+            </div>
+        </div>
+        <div class="section-title">考核维度</div>
+        <div class="department-select-container">
+            <label for="department-select">选择部门：</label>
+            <select id="department-select">
+                <option value="">请选择部门</option>
+                <!-- 部门选项将通过 JavaScript 动态添加 -->
+            </select>
+        </div>
+        <!-- 职能表现部分 -->
+        <!-- 专业职能部分 - 已经正确 -->
+        <div class="dimension-section">
+            <div class="dimension-header">
+                <div class="dimension-title">专业职能</div>
+                <select class="evaluation-mode-select">
+                    <option value="rating">评级</option>
+                    <option value="scoring">打分</option>
+                </select>
+                <span class="dimension-score-container">
+            <span class="dimension-score-display" title="点击编辑" contenteditable="true">30</span>（该项分数）
+        </span>
+            </div>
+            <div class="criteria-list">
+                <div class="add-criteria">
+                    <span>+ 添加评分项</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 通用职能部分 - 需要修正 -->
+        <div class="dimension-section">
+            <div class="dimension-header">
+                <div class="dimension-title">通用职能</div>
+                <span class="dimension-score-container">
+            <span class="dimension-score-display" title="点击编辑" contenteditable="true">70</span>（该项分数）
+        </span>
+            </div>
+            <div class="criteria-list">
+                <div class="add-criteria">
+                    <span>+ 添加评分项</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 产品/项目表现部分 - 需要修正 -->
+        <div class="dimension-section">
+            <div class="dimension-header">
+                <div class="dimension-title">产品/项目表现</div>
+                <span class="dimension-score-container">
+            <span class="dimension-score-display" title="点击编辑" contenteditable="true">5</span>（该项分数）
+        </span>
+            </div>
+            <!-- 产品/项目表现不需要添加评分项 -->
+        </div>
+
+        <div class="section-title">等级分值设置</div>
+        <div class="distribution-grid">
+            <div class="distribution-item">
+                <!-- 等级分值设置部分 -->
+                <div class="distribution-grid">
+                    <div class="grade-wrapper">
+                        <div class="grade-pair">
+                            <span>A</span>
+                            <input type="number" class="grade-input" value="10">
+                        </div>
+                        <div class="grade-pair">
+                            <span>B+</span>
+                            <input type="number" class="grade-input" value="9">
+                        </div>
+                        <div class="grade-pair">
+                            <span>B</span>
+                            <input type="number" class="grade-input" value="7">
+                        </div>
+                        <div class="grade-pair">
+                            <span>C</span>
+                            <input type="number" class="grade-input" value="2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">考勤规则</div>
+        <div class="score-item">
+            <span>迟到一次扣</span>
+            <input type="number" class="score-input" value="1">
+        </div>
+        <div class="score-item">
+            <span>早退一次扣</span>
+            <input type="number" class="score-input" value="2">
+        </div>
+        <div class="score-item">
+            <span>xxx扣</span>
+            <input type="number" class="score-input" value="1">
+        </div>
+
+
+        <div class="section-title">强制分布</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+            <span>开启强制分布</span>
+            <label class="switch">
+                <input type="checkbox" id="forcedDistributionSwitch">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="info-text">
+            开启后该考核表将按分布比例进行打分: A & B+ 等级占比不超过
+            <input type="number" id="distributionPercentage" class="percent age-input" value="0" min="0" max="100">
+        </div>
+        <div class="submit-section">
+            <button id="submitForm" class="submit-button">提交考核表</button>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+<script src="{{ url_for('static', filename='js/Gentable.js') }}"></script>
+<script>
+    // 获取 checkbox 和百分比输入框
+    const forcedDistributionSwitch = document.getElementById('forcedDistributionSwitch');
+    const distributionPercentage = document.getElementById('distributionPercentage');
+
+    // 设置初始状态
+    if (!forcedDistributionSwitch.checked) {
+        distributionPercentage.disabled = true; // 默认禁用输入框
+    }
+
+    // 添加事件监听器，当 checkbox 状态改变时执行
+    forcedDistributionSwitch.addEventListener('change', function() {
+        if (this.checked) {
+            distributionPercentage.disabled = false; // 勾选时启用输入框
+        } else {
+            distributionPercentage.disabled = true; // 未勾选时禁用输入框
+        }
+    });
+
+</script>
+</body>
+</html>

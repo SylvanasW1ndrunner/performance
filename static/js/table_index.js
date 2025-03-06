@@ -1,0 +1,313 @@
+document.addEventListener("DOMContentLoaded", function () {
+    loadTableData(); // 页面加载时获取考核表
+    function openModal() {
+        document.getElementById("modal-overlay").style.display = "flex"; // 显示弹窗
+    }
+
+// 关闭弹窗
+
+    // 获取考核表数据并展示
+    function loadTableData() {
+        fetch("/gettable")
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.querySelector(".assessment-table tbody");
+                tbody.innerHTML = ""; // 清空表格，避免重复加载
+
+                data.forEach(row => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${row.name}</td>
+                        <td>${row.departmentid}</td>
+                        <td>${row.departmentname}</td>
+                        <td>${row.deadline}</td>
+                        <td>
+                            <button class="view-btn" data-name="${row.name}">查看</button>
+                            <button class="delete-btn" data-name="${row.name}" data-departmentid = "${row.departmentid}">删除</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                // 绑定查看按钮
+                document.querySelectorAll(".view-btn").forEach(btn => {
+                    btn.addEventListener("click", function () {
+                        viewTable(this.getAttribute("data-name"));
+                    });
+                });
+
+                // 绑定删除按钮
+                document.querySelectorAll(".delete-btn").forEach(btn => {
+                    btn.addEventListener("click", function () {
+                        deleteTable(this.getAttribute("data-name"),this.getAttribute("data-departmentid"));
+                    });
+                });
+            })
+            .catch(error => console.error("Error fetching table data:", error));
+    }
+    function deleteTable(version,departmentid) {
+        fetch("/deletetable", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({version: version, departmentid:departmentid })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("删除成功");
+                    loadTableData(); // 更新表格
+                } else {
+                    alert("删除失败");
+                }
+            });
+    }
+
+
+    // 查看考核表
+    function viewTable(version) {
+        fetch("/viewtable", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ version: version })
+        })
+            .then(response => response.json())
+            .then(data => {
+                // 调用 showModal 函数填充并展示浮窗
+                showModal(data);
+            })
+            .catch(error => {
+                console.error("Error fetching table details:", error);
+                alert("加载表格详情失败，请稍后重试");
+            });
+    }
+
+    // 显示考核表详情
+// 显示考核表详情
+    function showModal(data) {
+        // 获取现有的 modal 元素
+        const modal = document.getElementById("modal-overlay");
+
+        // 填充 modal 内容
+        document.getElementById("assessmentTitle").value = data.name;
+        document.getElementById("assessmentPeriod").value = data.ddl;
+
+        // 填充各个维度的数据
+        const managerPerformanceList = document.getElementById("managementPerformance");
+        const functionalPerformanceList = document.getElementById("functionalPerformance");
+        const projectPerformanceList = document.getElementById("projectPerformance");
+        const grades = document.getElementById("gradeSettings");
+        const rule = document.getElementById("attendanceRules");
+
+        // 清空旧的数据
+        managerPerformanceList.innerHTML = "";
+        functionalPerformanceList.innerHTML = "";
+        projectPerformanceList.innerHTML = "";
+        grades.innerHTML = "";
+        rule.innerHTML = "";
+
+        // 解析JSON数据
+        let description;
+        try {
+            description = typeof data.description === 'string' ? JSON.parse(data.description) : data.description;
+        } catch (e) {
+            console.error("解析description数据失败:", e);
+            description = {};
+        }
+
+        let scoreRule = typeof data.score_rule === 'string' ? JSON.parse(data.score_rule) : data.score_rule;
+        let punishment = typeof data.punishment === 'string' ? JSON.parse(data.punishment) : data.punishment;
+
+        // 设置分布比例
+        if (data.distribution) {
+            document.getElementById("distributionPercentage").value = data.distribution;
+        }
+
+        // 处理新的description格式
+        if (description) {
+            // 专业职能部分
+            if (description["专业职能"]) {
+                // 设置专业职能分数
+                const professionalScore = description["专业职能"]["分数"] || 0;
+
+                // 创建并添加分数显示元素
+                const scoreDisplay = document.createElement("div");
+                scoreDisplay.className = "dimension-score-container";
+                scoreDisplay.innerHTML = `<span class="dimension-score-display">${professionalScore}</span>（该项分数）`;
+
+                // 获取专业职能标题元素
+                const professionalTitle = document.querySelector('#managementPerformance').previousElementSibling;
+
+                // 如果存在评分方式，显示它
+                if (description["专业职能"]["评分方式"]) {
+                    const evaluationMode = description["专业职能"]["评分方式"];
+
+                    // 创建评分方式显示
+                    const modeDisplay = document.createElement("div");
+                    modeDisplay.className = "evaluation-mode-display";
+                    modeDisplay.innerHTML = `评分方式：<span>${evaluationMode}</span>`;
+
+                    // 创建标题和评分方式的容器
+                    const headerContainer = document.createElement("div");
+                    headerContainer.className = "dimension-header";
+
+                    // 将原标题内容移到新容器
+                    headerContainer.innerHTML = professionalTitle.innerHTML;
+                    professionalTitle.innerHTML = "";
+
+                    // 添加评分方式和分数到标题容器
+                    headerContainer.appendChild(modeDisplay);
+                    headerContainer.appendChild(scoreDisplay);
+
+                    // 将新容器添加到标题元素
+                    professionalTitle.appendChild(headerContainer);
+                } else {
+                    // 如果没有评分方式，直接添加分数显示
+                    professionalTitle.appendChild(scoreDisplay);
+                }
+
+                // 处理评分项
+                if (Array.isArray(description["专业职能"]["评分项"])) {
+                    description["专业职能"]["评分项"].forEach(item => {
+                        const key = Object.keys(item)[0];
+                        const value = item[key];
+
+                        const div = document.createElement("div");
+                        div.className = "criteria-item";
+
+                        // 根据评分方式显示不同内容
+                        if (description["专业职能"]["评分方式"] === "打分") {
+                            div.innerHTML = `
+                            <span class="criteria-text">${key}</span>
+                            <span class="score-value-container">
+                                <span class="score-value-display">${value}</span>分
+                            </span>
+                        `;
+                        } else {
+                            div.innerHTML = `
+                            <span class="criteria-text">${key}</span>
+                            <span class="percentage-display">${value}%</span>
+                        `;
+                        }
+
+                        managerPerformanceList.appendChild(div);
+                    });
+                }
+            }
+
+            // 通用职能部分
+            if (description["通用职能"]) {
+                // 设置通用职能分数
+                const generalScore = description["通用职能"]["分数"] || 0;
+
+                // 创建并添加分数显示元素
+                const scoreDisplay = document.createElement("div");
+                scoreDisplay.className = "dimension-score-container";
+                scoreDisplay.innerHTML = `<span class="dimension-score-display">${generalScore}</span>（该项分数）`;
+
+                // 获取通用职能标题元素
+                const generalTitle = document.querySelector('#functionalPerformance').previousElementSibling;
+                generalTitle.appendChild(scoreDisplay);
+
+                // 处理评分项
+                if (Array.isArray(description["通用职能"]["评分项"])) {
+                    description["通用职能"]["评分项"].forEach(item => {
+                        const key = Object.keys(item)[0];
+                        const value = item[key];
+
+                        const div = document.createElement("div");
+                        div.className = "criteria-item";
+                        div.innerHTML = `
+                        <span class="criteria-text">${key}</span>
+                        <span class="percentage-display">${value}%</span>
+                    `;
+
+                        functionalPerformanceList.appendChild(div);
+                    });
+                }
+            }
+
+            // 产品表现部分
+            if (description["产品表现"]) {
+                // 设置产品表现分数
+                const productScore = description["产品表现"]["分数"] || 0;
+
+                // 创建并添加分数显示元素
+                const scoreDisplay = document.createElement("div");
+                scoreDisplay.className = "dimension-score-container";
+                scoreDisplay.innerHTML = `<span class="dimension-score-display">${productScore}</span>（该项分数）`;
+
+                // 获取产品表现标题元素
+                const productTitle = document.querySelector('#projectPerformance').previousElementSibling;
+                productTitle.appendChild(scoreDisplay);
+
+                // 产品表现没有评分项，只有分数
+            }
+        } else if (Array.isArray(data.description)) {
+            // 兼容旧格式的数据
+            data.description.forEach(item => {
+                const div = document.createElement("div");
+                div.className = "criteria-item";
+                div.innerHTML = `<span class="criteria-text">${item.name}</span>`;
+
+                if (item.flag === 1) {
+                    // 如果是产品/项目表现
+                    projectPerformanceList.appendChild(div);
+                } else if (item.flag === 2) {
+                    // 如果是职能表现
+                    functionalPerformanceList.appendChild(div);
+                } else {
+                    // 如果是管理表现
+                    managerPerformanceList.appendChild(div);
+                }
+            });
+        }
+
+        // 填充等级分值设置
+        if (Array.isArray(scoreRule)) {
+            scoreRule.forEach(item => {
+                const div = document.createElement("div");
+                div.className = "grade-pair";
+                div.innerHTML = `
+                <span>${item.grade}</span>
+                <input type="number" class="readonly-input" value="${item.value}" readonly>
+            `;
+                grades.appendChild(div);
+            });
+        }
+
+        // 填充考勤规则
+        if (Array.isArray(punishment)) {
+            punishment.forEach(item => {
+                const div = document.createElement("div");
+                div.className = "score-item";
+                div.innerHTML = `
+                <span>${item.rule}</span>
+                <input type="number" class="readonly-input" value="${item.score}" readonly>
+            `;
+                rule.appendChild(div);
+            });
+        }
+
+        // 显示 modal
+        modal.style.display = "flex";
+
+        // 关闭 modal
+        document.getElementById("close-modal").addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        modal.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        document.getElementById("close-modal-btn").addEventListener("click", function() {
+            document.getElementById("modal-overlay").style.display = "none"; // 隐藏弹窗
+        });
+    }
+});
