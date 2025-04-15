@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9cf7da67-5729-4702-87ad-659980a0a62e" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/performance-master/performance/Entity/import_history.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/performance-master/performance/Entity/working_rate.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/performance-master/performance/static/css/data_import.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/performance-master/performance/static/css/edittable.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/performance-master/performance/static/js/data_import.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/performance-master/performance/static/js/edittable.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/performance-master/performance/templates/edittable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/.idea/Performance.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/Entity/User.py" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/Entity/User.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/static/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/static/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/static/css/gentable.css" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/static/css/gentable.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/static/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/static/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/static/css/member_management.css" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/static/css/member_management.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/static/css/score.css" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/static/css/score.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/static/css/table_index.css" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/static/css/table_index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/static/js/Gentable.js" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/static/js/Gentable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/static/js/member_management.js" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/static/js/member_management.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/static/js/performance_query.js" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/static/js/performance_query.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/static/js/score.js" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/static/js/score.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/static/js/score_evaluation.js" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/static/js/score_evaluation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/static/js/table_index.js" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/static/js/table_index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/templates/Gentable.html" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/templates/Gentable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/templates/change_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/templates/change_password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/templates/data_import.html" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/templates/data_import.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/templates/member_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/templates/member_management.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/templates/performance_query.html" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/templates/performance_query.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/templates/score.html" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/templates/score.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/templates/score_evaluation.html" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/templates/score_evaluation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/templates/table_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/templates/table_index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance-master/performance/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/performance-master/performance/test.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/performance-master/performance" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2vi7xKkpBGHRIl4Gfv9gZDsmbiO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "checkversion1.1",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/performance1"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="9cf7da67-5729-4702-87ad-659980a0a62e" name="更改" comment="" />
+      <created>1744616286076</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744616286076</updated>
+    </task>
+    <servers />
+  </component>
+</project>
