@@ -718,7 +718,8 @@ def submit_score():
             else:
                 depart_working_rate = 0  # 如果没有有效数据，则设为 0
         working_rate_value = working_rate.rate
-        total_score += working_rate_value + depart_working_rate
+        tmp_value = working_rate_value + depart_working_rate
+        total_score += tmp_value
         # 根据总分确定等级
         total_rank = "C"  # 默认等级
         if total_score >= 90:
@@ -765,7 +766,7 @@ def submit_score():
 
             # 重新计算总分
             new_total_score = current_abi_score + current_product_score + current_extra_bonus
-            existing_assessment.totalscore = new_total_score
+            existing_assessment.totalscore = new_total_score + tmp_value
 
             # 更新等级
             if new_total_score >= 90:
@@ -889,7 +890,7 @@ def showtablelist():
     assessmentlist = []
     tmp = AssessmentItems.query.all()
     for item in tmp:
-        if item.ddl > datetime.now() and user.departmentid == item.department:
+        if user.departmentid == item.department:
             assessmentlist.append({
                 "name": item.version,
                 "id": item.id
@@ -2133,5 +2134,5 @@ def edit_table():
 
 if __name__ == '__main__':
     #app.run('192.168.0.122', port=5000, debug=True)
-    app.run('127.0.0.1', port=5000, debug=True)
+    app.run('172.22.0.30', port=5000, debug=True)
     #app.run('192.168.0.209', port=5000, debug=True)

@@ -1,4 +1,4 @@
-#!/home/harusame/performance/performance/venv/bin/python3
+#!/home/zkjg/performance/venv/bin/python
 import sys
 from pypinyin.__main__ import main
 if __name__ == '__main__':
