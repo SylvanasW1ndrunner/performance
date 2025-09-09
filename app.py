@@ -285,7 +285,9 @@ def get_performance_detail():
         # 假设职能评分权重为60%，产品评分权重为40%
         functional_weight = 0.6
         product_weight = 0.4
-
+        # 查询考勤评分
+        working_rate = Working_rate.query.filter_by(emp_id=user_id).first()
+        attendance_score = working_rate.rate if working_rate else 0.0
         # 构建响应数据
         response_data = {
             "functionalScore": float(assessment.abiscore),
@@ -298,7 +300,9 @@ def get_performance_detail():
             "ProfessDes": assessment.ProfessionDes,
             "GeneralDes": assessment.gendes,
             "ProductDes": assessment.productscore,
-            "ExtraBonus":assessment.extrabonus
+            "ExtraBonus":assessment.extrabonus,
+            # 添加考勤评分 25年9月9日
+            "attendanceScore":attendance_score
         }
 
         return jsonify(response_data)
@@ -707,14 +711,23 @@ def submit_score():
 
             # 确保 allavgattendance 不为空
             if allavgattendance:
-                # 找到 avgattendance 在排序后的 allavgattendance 中的排名索引
-                rank_index = allavgattendance.index(avgattendance)
+                # 排序并去重，确保正确的排名次序（假设从高到低）
+                sorted_attendance = sorted(allavgattendance, reverse=True)
 
-                # 计算排名百分比
-                percentile = 1 - (rank_index / len(allavgattendance))
+                # 获取当前 avgattendance 的排名（从 1 开始）
+                rank_index = sorted_attendance.index(avgattendance) + 1
 
-                # 计算 working_rate
-                depart_working_rate = 10 * percentile
+                # 根据排名分配分数
+                if rank_index == 1:
+                    depart_working_rate = 10
+                elif rank_index in [2, 3]:
+                    depart_working_rate = 8
+                elif 4 <= rank_index <= 7:
+                    depart_working_rate = 6
+                elif 8 <= rank_index <= 9:
+                    depart_working_rate = 4
+                else:
+                    depart_working_rate = 2
             else:
                 depart_working_rate = 0  # 如果没有有效数据，则设为 0
         working_rate_value = working_rate.rate
@@ -768,12 +781,13 @@ def submit_score():
             new_total_score = current_abi_score + current_product_score + current_extra_bonus
             existing_assessment.totalscore = new_total_score + tmp_value
 
-            # 更新等级
-            if new_total_score >= 90:
+            # 更新等级 - 修改这里，使用包含考勤分数的总分
+            final_score_with_attendance = new_total_score + tmp_value
+            if final_score_with_attendance >= 90:
                 existing_assessment.totalrank = "A"
-            elif new_total_score >= 80:
+            elif final_score_with_attendance >= 80:
                 existing_assessment.totalrank = "B+"
-            elif new_total_score >= 70:
+            elif final_score_with_attendance >= 70:
                 existing_assessment.totalrank = "B"
             else:
                 existing_assessment.totalrank = "C"

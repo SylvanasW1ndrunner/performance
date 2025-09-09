@@ -545,6 +545,7 @@ function updatePerformanceResult(container, data, permissionLevel, userId, table
         functionalRow.appendChild(scoreCell);
         tbody.appendChild(functionalRow);
     }
+    
 
     // 产品评分行
     const productRow = document.createElement('tr');
@@ -557,6 +558,19 @@ function updatePerformanceResult(container, data, permissionLevel, userId, table
     productRow.appendChild(productTypeCell);
     productRow.appendChild(productScoreCell);
     tbody.appendChild(productRow);
+
+    // 考勤评分 
+    const attendanceRow = document.createElement('tr');
+    const attendanceTypeCell = document.createElement('td');
+    attendanceTypeCell.textContent = '考勤评分';
+
+    const attendanceScoreCell = document.createElement('td');
+    const attendanceScore = data.attendanceScore || 0
+    attendanceScoreCell.textContent = attendanceScore.toFixed(1);
+
+    attendanceRow.appendChild(attendanceTypeCell);
+    attendanceRow.appendChild(attendanceScoreCell);
+    tbody.appendChild(attendanceRow);
 
     // 总分行（超级管理员可编辑）
     if (permissionLevel <= 2) {
