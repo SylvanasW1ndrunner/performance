@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 function initializeYearQuarterSelectors() {
     const yearSelect = document.getElementById('year-select');
     const quarterSelect = document.getElementById('quarter-select');
+    const monthSelect = document.getElementById('month-select');
 
     const currentYear = new Date().getFullYear();
     const numberOfYears = 5; // 生成未来 5 年的选项
@@ -58,6 +59,15 @@ function initializeYearQuarterSelectors() {
         option.value = quarter;
         option.textContent = quarter;
         quarterSelect.appendChild(option);
+    });
+
+    // 生成月份选项
+    const months = ['M1', 'M2', 'M3', '--'];
+    months.forEach(month => {
+        const option = document.createElement('option');
+        option.value = month;
+        option.textContent = month;
+        monthSelect.appendChild(option);
     });
 }
 
@@ -204,22 +214,33 @@ function fillEvaluationForm(data) {
     console.log("填充考核表表单:", evaluationTableData);
     // 提取标题中的部门、年份和季度
     if (data.name) {
-        console.log("提取标题中的部门、年份和季度:", data.name);
+        console.log("提取标题中的部门、年份和季度月份:", data.name);
         // 新的解析逻辑:
-        // 季度是后两个字符
-        const quarter = data.name.substring(data.name.length - 2);
+        // 月份是后两个字符
+        let name = data.name;
+        if(data.name.substring(data.name.length - 3, data.name.length - 2) !== '-') {
+            name = name + "---"; 
+        }
+
+        console.log("调整后的标题:", name);
+
+        const month = name.substring(name.length - 2);
+        // 季度月份前的第三个字符和第二个字符
+        const quarter = name.substring(name.length - 5, name.length - 3);
         // 年份是季度前的4个字符
-        const year = data.name.substring(data.name.length - 6, data.name.length - 2);
+        const year = name.substring(name.length - 9, name.length - 5);
         // 部门名称是剩余的前部分（不包括"年 "）
-        const departmentName = data.name.substring(0, data.name.length - 6);
+        const departmentName = name.substring(0, name.length - 9);
 
         console.log("提取的部门:", departmentName);
         console.log("提取的年份:", year);
         console.log("提取的季度:", quarter);
+        console.log("提取的月份:", month);
 
         // 设置年份和季度
         document.getElementById('year-select').value = year;
         document.getElementById('quarter-select').value = quarter;
+        document.getElementById('month-select').value = month;
 
         // 设置部门
         const departmentSelect = document.getElementById('department-select');

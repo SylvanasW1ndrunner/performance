@@ -5,6 +5,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const yearSelect = document.getElementById('year-select');
     const quarterSelect = document.getElementById('quarter-select');
+    const monthSelect = document.getElementById('month-select');
 
     const currentYear = new Date().getFullYear();
     const numberOfYears = 5; // 生成未来 5 年的选项
@@ -26,18 +27,37 @@ document.addEventListener("DOMContentLoaded", function() {
         quarterSelect.appendChild(option);
     });
 
+    // 生成月份选项
+    const months = ['M1', 'M2', 'M3', '--'];
+    months.forEach(month => {
+        const option = document.createElement('option');
+        option.value = month;
+        option.textContent = month;
+        monthSelect.appendChild(option);
+    });
+
     // 监听年份选择变化
     yearSelect.addEventListener('change', function() {
         const selectedYear = yearSelect.value;
         const selectedQuarter = quarterSelect.value;
-        console.log(`选择的年份：${selectedYear}，季度：${selectedQuarter}`);
+        const selectedMonth = monthSelect.value;
+        console.log(`选择的年份：${selectedYear}，季度：${selectedQuarter}，月份：${selectedMonth}`);
     });
 
     // 监听季度选择变化
     quarterSelect.addEventListener('change', function() {
         const selectedYear = yearSelect.value;
         const selectedQuarter = quarterSelect.value;
-        console.log(`选择的年份：${selectedYear}，季度：${selectedQuarter}`);
+        const selectedMonth = monthSelect.value;
+        console.log(`选择的年份：${selectedYear}，季度：${selectedQuarter}，月份：${selectedMonth}`);
+    });
+
+    // 监听月份选择变化
+    monthSelect.addEventListener('change', function() {
+        const selectedYear = yearSelect.value;
+        const selectedQuarter = quarterSelect.value;
+        const selectedMonth = monthSelect.value;
+        console.log(`选择的年份：${selectedYear}，季度：${selectedQuarter}，月份：${selectedMonth}`);
     });
 });
 
@@ -560,9 +580,10 @@ document.getElementById('submitForm')?.addEventListener('click', async function(
     const departmentname = departmentSelect.options[departmentSelect.selectedIndex].text;
     const year = document.querySelector('#year-select')?.value;
     const quarter = document.querySelector('#quarter-select')?.value;
+    const month = document.querySelector('#month-select')?.value;
 
 // 组装 title
-    const title = `${departmentname}${year}年 ${quarter}`;
+    const title = `${departmentname}${year}年 ${quarter}-${month}`;
 
 // 计算 evaluationPeriod（当前日期加 15 天）
     const currentDate = new Date();

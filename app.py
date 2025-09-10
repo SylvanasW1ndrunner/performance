@@ -98,6 +98,10 @@ def edittable():
     version = version.strip()  # 注意赋值回去
     version = version.replace("年 ", "")  # 删除 "年" 字符
 
+     # 如果最后一个字符是 "-"，则删除后三个字符
+    if version.endswith("-"):
+        version = version[:-3]
+
     print(version)
 
     department = formData['departmentId']
@@ -130,7 +134,7 @@ def getusername():
         return jsonify({"error": "未找到用户"}), 404
     return jsonify({"username": user.emp_name}), 200
 
-@app.route('/copytable', methods=['POST'])
+@app.route('/copytable', methods=['POST'])  # 复制绩效评估表
 @jwt_required()
 def copytable():
     data = request.get_json()
@@ -138,19 +142,24 @@ def copytable():
     year = data.get('year')
     print("year:", year)
     quarter = data.get('quarter')
+    month = data.get('month')
     departmentid = data.get('departmentid')
-    if not version or not year or not quarter or not departmentid:
+    if not version or not year or not quarter or not month or not departmentid:
         return jsonify({"error": "缺少必要参数"}), 400
     print("version:", version)
     print("year:", year)
     print("quarter:", quarter)
+    print("month:", month)
     print("departmentid:", departmentid)
     assessmentitem = AssessmentItems.query.filter_by(version=version).first()
     department = Department.query.filter_by(id=departmentid).first()
     departmentname = department.name
     if not assessmentitem:
         return jsonify({"error": "未找到考核项"}), 404
-    newversion = departmentname + year  + quarter
+    if month == "--":
+        newversion = departmentname + year  + quarter
+    else:
+        newversion = departmentname + year  + quarter + '-' + month
     new_item = AssessmentItems.create(
         description=assessmentitem.description,
         score_rule=assessmentitem.score_rule,
@@ -968,7 +977,7 @@ def deletetable():
         return jsonify({"success": False}), 400
 
 
-@app.route('/api/submit_evaluation', methods=['POST'])
+@app.route('/api/submit_evaluation', methods=['POST'])  # 提交绩效评估表
 @jwt_required()
 def submit_evaluation():
     token = get_jwt_identity()
@@ -1032,6 +1041,10 @@ def submit_evaluation():
     # 修复 strip() 和 replace() 方法
     version = version.strip()  # 注意赋值回去
     version = version.replace("年 ", "")  # 删除 "年" 字符
+
+    # 如果最后一个字符是 "-"，则删除后三个字符
+    if version.endswith("-"):
+        version = version[:-3]
 
     print(version)
 

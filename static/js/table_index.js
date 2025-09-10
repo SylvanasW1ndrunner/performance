@@ -138,6 +138,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 </select>
             </div>
             <div class="form-group">
+                <label for="copy-month">选择月份:</label>
+                <select class="form-input" id="copy-month">
+                    <option value="M1">M1</option>
+                    <option value="M2">M2</option>
+                    <option value="M3">M3</option>
+                    <option value="--">--</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="copy-department">选择部门:</label>
                 <select class="form-input" id="copy-department">
                     ${departments.map(dept => `<option value="${dept.id}">${dept.name}</option>`).join('')}
@@ -174,11 +183,12 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("confirm-copy-btn").addEventListener("click", function() {
             const year = document.getElementById("copy-year").value;
             const quarter = document.getElementById("copy-quarter").value;
+            const month = document.getElementById("copy-month").value;
             const departmentid = document.getElementById("copy-department").value;
 
             // 调用复制API
             token = getToken();
-            console.log("version:",version,"year:",year,"quarter:",quarter,"departmentid:",departmentid);
+            console.log("version:",version,"year:",year,"quarter:",quarter,"month:",month,"departmentid:",departmentid);
             fetch("/copytable", {
                 method: "POST",
                 headers: {
@@ -189,6 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     version: version,
                     year: year,
                     quarter: quarter,
+                    month: month,
                     departmentid: departmentid
                 })
             })
