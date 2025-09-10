@@ -64,10 +64,16 @@ document.getElementById('performanceForm').addEventListener('submit', async func
     };
 
     // 检查是否选择了所有文件
-    if (!files.file1 || !files.file2 || !files.file3) {
-        alert('请选择所有三个文件');
-        return;
-    }
+    // if ( files.file1 && !files.file2 && !files.file3 ) {
+    //     delete files.file2;
+    //     delete files.file3;
+    // }
+    // else if ( files.file1 && files.file2 && files.file3 ) {
+    // }
+    // else {
+    //     alert('请提交三个表格或仅提交第一张表格');
+    //     return;
+    // }
 
     // 添加确认对话框
     if (!confirm('确认要上传这些文件吗？')) {

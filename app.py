@@ -1452,21 +1452,22 @@ def upload_performance():
     if not isSA:
         return jsonify({'success': False, 'message': '权限不足，仅系统管理员可以上传文件'}), 403
 
-    if 'file1' not in request.files or 'file2' not in request.files or 'file3' not in request.files:
-        return jsonify({'success': False, 'message': '请上传所有三个文件'})
-
     files = {
-        'file1': request.files['file1'],
-        'file2': request.files['file2'],
-        'file3': request.files['file3']
+        'file1': request.files['file1'] if 'file1' in request.files else None,
+        'file2': request.files['file2'] if 'file2' in request.files else None,
+        'file3': request.files['file3'] if 'file3' in request.files else None
     }
 
+    if ( not files['file2'] and not files['file3'] ):
+        del files['file2']
+        del files['file3']
+
     # 检查文件名
-    for file_key, file in files.items():
-        if file.filename == '':
-            return jsonify({'success': False, 'message': f'{file_key}未选择文件'})
-        if not allowed_file(file.filename):
-            return jsonify({'success': False, 'message': f'{file_key}文件格式不正确'})
+    # for file_key, file in files.items():
+    #     if file.filename == '':
+    #         return jsonify({'success': False, 'message': f'{file_key}未选择文件'})
+    #     if not allowed_file(file.filename):
+    #         return jsonify({'success': False, 'message': f'{file_key}文件格式不正确'})
 
     try:
         # 清空历史记录表
@@ -1571,6 +1572,7 @@ def upload_performance():
                     db.session.commit()
                 else:
                     new_record = Working_rate(
+                        emp_id = user.emp_id,
                         emp_name=name,
                         work_hours=total_hours,
                         rate=rates[name]
@@ -2161,5 +2163,5 @@ def edit_table():
 
 if __name__ == '__main__':
     #app.run('192.168.0.122', port=5000, debug=True)
-    app.run('172.22.0.30', port=5000, debug=True)
+    app.run('127.0.0.1', port=5000, debug=True)
     #app.run('192.168.0.209', port=5000, debug=True)
